@@ -24,7 +24,6 @@ function reloadWebsite() {
 
 setInterval(reloadWebsite, interval);
 
-
 const io = new Server(server, {
   cors: {
     origin: "*",
@@ -38,6 +37,13 @@ io.on("connection", (socket) => {
 
   let currentRoom = null;
   let currentUser = null;
+
+  // Chat message handler: receive from one client and broadcast to the room
+  socket.on("chatMessage", ({ roomId, msg }) => {
+    if (!roomId) return;
+    // Broadcast the message to everyone in the room (including sender)
+    io.to(roomId).emit("chatMessage", msg);
+  });
 
   socket.on("join", ({ roomId, userName }) => {
     if (currentRoom) {
@@ -84,23 +90,25 @@ io.on("connection", (socket) => {
     io.to(roomId).emit("languageUpdate", language);
   });
 
-    socket.on("compileCode", async ({ code, roomId, language, version }) => {
+  socket.on("compileCode", async ({ code, roomId, language, version }) => {
     if (rooms.has(roomId)) {
       const room = rooms.get(roomId);
-      const response = await axios.post("https://emkc.org/api/v2/piston/execute", {
-        language,
-        version,
-        files: [
-          {
-            content: code,
-          },
-        ],
-      });
+      const response = await axios.post(
+        "https://emkc.org/api/v2/piston/execute",
+        {
+          language,
+          version,
+          files: [
+            {
+              content: code,
+            },
+          ],
+        }
+      );
       room.output = response.data.run.output;
       io.to(roomId).emit("codeResponse", response.data);
     }
   });
-
 
   socket.on("disconnect", () => {
     if (currentRoom && currentUser) {
