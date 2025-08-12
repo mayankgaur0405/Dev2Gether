@@ -1,170 +1,224 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* 🎨 Modern Theme Variables */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --neon-green: #0ff96a;
+  --neon-blue: #00f7ff;
+  --text-light: #f1f1f1;
+  --text-dark: #222;
+  --shadow-3d: 0 10px 20px rgba(0, 0, 0, 0.3);
+  --font-main: "Poppins", sans-serif;
+}
+
+/* 🔹 Animated Gradient Background */
+@keyframes animatedGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🔥 Animated Gradient Border */
+@keyframes borderAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 body {
-  font-family: "Roboto", "sans-serif";
-  background: #f0f2f5;
-  color: #333;
+  background: linear-gradient(-45deg, #6a11cb, #2575fc, #ff6ec4, #00f7ff);
+  background-size: 400% 400%;
+  animation: animatedGradient 10s ease infinite;
+  color: var(--text-light);
+  font-family: var(--font-main);
 }
 
+/* Common animated-border class */
+.animated-border {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.animated-border::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  z-index: -1;
+  background: linear-gradient(-45deg, #6a11cb, #2575fc, #ff6ec4, #00f7ff);
+  background-size: 400% 400%;
+  animation: borderAnimation 8s ease infinite;
+  border-radius: inherit;
+}
+
+/* 🎯 Join Room Page */
 .join-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-
-  .join-form {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 300px;
-
-    h1 {
-      margin-bottom: 1.5rem;
-      color: #333;
-    }
-
-    input {
-      width: 100%;
-      padding: 0.75rem;
-      margin-bottom: 1rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
-
-    button {
-      width: 100%;
-      padding: 0.75rem;
-      background-color: #4a90e2;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: #357abd;
-      }
-    }
-  }
 }
 
+.join-form {
+  background: var(--glass-bg);
+  padding: 2rem;
+  border-radius: 15px;
+  backdrop-filter: blur(15px);
+  box-shadow: var(--shadow-3d);
+  border: 1px solid var(--glass-border);
+  text-align: center;
+  width: 320px;
+  animation: floatCard 3s ease-in-out infinite;
+}
+.join-form h1 {
+  margin-bottom: 1.5rem;
+  color: white;
+  font-weight: 600;
+}
+.join-form input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+.join-form input:focus {
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+.join-form button {
+  width: 100%;
+  padding: 0.75rem;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background: linear-gradient(-45deg, #6a11cb, #2575fc, #ff6ec4, #00f7ff);
+  background-size: 400% 400%;
+  animation: animatedGradient 8s ease infinite;
+}
+.join-form button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px var(--neon-green), 0 0 25px var(--neon-blue);
+}
+
+/* 🌟 Sidebar */
 .editor-container {
   display: flex;
   height: 100vh;
-
-  .sidebar {
-    width: 250px;
-    padding: 1.5rem;
-    background-color: #2c3e50;
-    color: #ecf0f1;
-
-    .room-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 1rem;
-
-      h2 {
-        margin-bottom: 1rem;
-        font-size: 1.2rem;
-      }
-
-      .copy-button {
-        padding: 0.5rem 1rem;
-        background-color: #3498db;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-
-        &:hover {
-          background-color: #2980b9;
-        }
-      }
-
-      .copy-success {
-        margin-left: 0.5rem;
-        color: rgb(38, 167, 38);
-        font-size: 0.8rem;
-      }
-    }
-
-    h3 {
-      margin-top: 1.5rem;
-      margin-bottom: 0.5rem;
-      font-size: 1rem;
-    }
-    ul {
-      list-style: none;
-      li {
-        padding: 0.5rem;
-        font-size: 0.9rem;
-        background: gray;
-        margin-top: 5px;
-        border-radius: 5px;
-      }
-    }
-
-    .typing-indicator {
-      margin-top: 1rem;
-      font-size: 1rem;
-      color: white;
-    }
-
-    .language-selector {
-      margin-top: 1rem;
-      width: 100%;
-      padding: 0.5rem;
-      background-color: #34495e;
-      color: white;
-      border: none;
-      border-radius: 4px;
-    }
-
-    .leave-button {
-      margin-top: 1rem;
-      width: 100%;
-      padding: 0.75rem;
-      background-color: #e74c3c;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: #ab2a1c;
-      }
-    }
-  }
-
-  .editor-wrapper {
-    flex-grow: 1;
-    background-color: #fff;
-  }
+}
+.sidebar {
+  width: 260px;
+  padding: 1.5rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  border-right: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-3d);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.sidebar h2 {
+  font-size: 1.3rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.copy-button {
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: 0.2s;
+  background: linear-gradient(-45deg, #6a11cb, #2575fc, #ff6ec4, #00f7ff);
+  background-size: 400% 400%;
+  animation: animatedGradient 8s ease infinite;
+}
+.copy-button:hover {
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+.copy-success {
+  color: var(--neon-green);
+  font-size: 0.9rem;
+}
+ul { list-style: none; }
+ul li {
+  padding: 0.5rem;
+  background: var(--glass-bg);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+.typing-indicator {
+  font-style: italic;
+  color: var(--neon-green);
+}
+.language-selector {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: none;
+  background: var(--glass-bg);
+  color: white;
+  outline: none;
+}
+.leave-button {
+  background: #e74c3c;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.leave-button:hover {
+  box-shadow: 0 0 10px red;
 }
 
+/* 🖥 Editor Area */
+.editor-wrapper {
+  flex-grow: 1;
+  padding: 1rem;
+  background: #1b1b2f;
+  display: flex;
+  flex-direction: column;
+}
 .run-btn {
-  background-color: rgb(12, 209, 38);
-  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  color: white;
+  background: linear-gradient(-45deg, #6a11cb, #2575fc, #ff6ec4, #00f7ff);
+  background-size: 400% 400%;
+  animation: animatedGradient 8s ease infinite;
+}
+.run-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px var(--neon-green);
 }
 
+/* 💻 Output Console */
 .output-console {
   width: 100%;
-  margin-top: 10px;
-  padding: 10px;
-  font-size: 20px;
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 1rem;
+  background: #000;
+  color: var(--neon-green);
+  border-radius: 8px;
   height: 200px;
+  overflow-y: auto;
+  font-family: monospace;
+  box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+/* 🎬 Animations */
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
 }

@@ -5,6 +5,12 @@ import Editor from "@monaco-editor/react";
 
 const socket = io("https://dev2gether.onrender.com");
 
+// const socket = io(
+//   import.meta.env.MODE === "development"
+//     ? "http://localhost:5000" // Local dev server
+//     : "https://dev2gether.onrender.com" // Production server
+// );
+
 const App = () => {
   const [joined, setJoined] = useState(false);
   const [roomId, setRoomId] = useState("");
