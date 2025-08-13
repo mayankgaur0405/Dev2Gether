@@ -27,7 +27,7 @@ const App = () => {
   const [messages, setMessages] = useState([]);
   const [chatInput, setChatInput] = useState("");
 
-   useEffect(() => {
+  useEffect(() => {
     if (socket && roomId && userName) {
       socket.emit("join", { roomId, userName });
     }
@@ -466,7 +466,9 @@ const App = () => {
             <ul className="users-list">
               {users.map((u, i) => (
                 <li key={i}>
-                  {typeof u === "string" ? u.slice(0, 8) + "..." : String(u)}
+                  {typeof u === "string" && u.length > 15
+                    ? u.slice(0, 15) + "..."
+                    : String(u)}
                 </li>
               ))}
             </ul>
