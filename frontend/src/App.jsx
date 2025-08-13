@@ -249,33 +249,70 @@ const App = () => {
           className={`icon-btn ${videoOn ? "on" : "off"}`}
           title="Video"
           onClick={() => setVideoOn((v) => !v)}
+          style={{
+            backgroundColor: videoOn ? "transparent" : "red",
+            borderRadius: "50%",
+            padding: "6px",
+          }}
         >
           <svg viewBox="0 0 24 24">
+            {/* Camera icon */}
             <path
               fill="currentColor"
               d="M17 10.5V7a2 2 0 0 0-2-2H5C3.9 5 3 5.9 3 7v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3.5l4 4v-11l-4 4z"
             />
+            {/* Slash line only when video is OFF */}
+            {!videoOn && (
+              <line
+                x1="3"
+                y1="3"
+                x2="21"
+                y2="21"
+                stroke="white"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
+            )}
           </svg>
         </button>
 
         {/* 2. Audio toggle */}
         <button
           className={`icon-btn ${audioOn ? "on" : "off"}`}
-          title="Mic"
+          title={audioOn ? "Turn Off Mic" : "Turn On Mic"}
           onClick={() => setAudioOn((v) => !v)}
+          style={{
+            backgroundColor: audioOn ? "transparent" : "red", // red bg when off
+            borderRadius: "50%",
+            padding: "6px",
+            color: "white",
+          }}
         >
-          <svg viewBox="0 0 24 24">
+          <svg viewBox="0 0 24 24" width="24" height="24">
+            {/* Mic Icon (same shape for on/off) */}
             <path
               fill="currentColor"
               d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"
             />
+            {/* Slash line only when audio is OFF */}
+            {!audioOn && (
+              <line
+                x1="3"
+                y1="3"
+                x2="21"
+                y2="21"
+                stroke="white"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
+            )}
           </svg>
         </button>
 
         {/* 3. Users */}
         <button
           className={`icon-btn ${rightSidebar === "users" ? "active" : ""}`}
-          title="Users"
+          title="View Participants"
           onClick={() =>
             setRightSidebar(rightSidebar === "users" ? null : "users")
           }
@@ -292,7 +329,7 @@ const App = () => {
         {/* 4. Chat */}
         <button
           className={`icon-btn ${rightSidebar === "chat" ? "active" : ""}`}
-          title="Chat"
+          title="Join the Chat"
           onClick={() =>
             setRightSidebar(rightSidebar === "chat" ? null : "chat")
           }
@@ -308,7 +345,7 @@ const App = () => {
         {/* 5. AI */}
         <button
           className="icon-btn"
-          title="AI"
+          title="AI Assistant"
           onClick={() => showToast("AI assistant coming soon")}
         >
           <svg
