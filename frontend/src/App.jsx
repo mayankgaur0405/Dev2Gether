@@ -346,7 +346,29 @@ const App = () => {
         <button
           className="icon-btn"
           title="AI Assistant"
-          onClick={() => showToast("AI assistant coming soon")}
+          onClick={() =>
+            showToast(
+              <div
+                style={{
+                  padding: "15px",
+                  borderRadius: "12px",
+                  backgroundColor: "#1b1b2f", // dark background, change as needed
+                  color: "#f1f1f1", // text color
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+                  maxWidth: "300px",
+                }}
+              >
+                <strong style={{ display: "block", marginBottom: "8px" }}>
+                  AI Assistant Coming Soon!
+                </strong>
+                <p style={{ margin: 0, fontSize: "14px", lineHeight: "1.4" }}>
+                  We’re hard at work building an intelligent assistant to make
+                  your experience smarter and faster. Stay tuned for something
+                  innovative!
+                </p>
+              </div>
+            )
+          }
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
