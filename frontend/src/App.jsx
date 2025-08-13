@@ -218,7 +218,7 @@ const App = () => {
               onClick={() => setShowRoomMenu((v) => !v)}
               title="Room options"
             >
-              Room
+              Room ID
             </button>
             {showRoomMenu && (
               <div className="room-menu-popover">
