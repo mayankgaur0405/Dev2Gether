@@ -369,11 +369,55 @@ body {
 }
 
 .typing-inline {
-  height: 18px;
-  font-size: 12px;
+  margin-left: 500px;
+  height: 20px;
+  font-size: 14px;
   color: var(--neon-green);
-  opacity: .85;
+  opacity: 1;
+  font-family: monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 6px; /* space between icon and text */
+  text-shadow: 
+    0 0 6px var(--neon-green),
+    0 0 12px var(--neon-green),
+    0 0 20px var(--neon-green),
+    0 0 40px var(--neon-green);
+  animation: glowPulse 1.5s ease-in-out infinite;
 }
+
+.typing-inline::before {
+  content: "✏️"; /* you can swap with 🔵, 💬, ⌨️, etc. */
+  font-size: 14px;
+  animation: iconBounce 1s ease-in-out infinite;
+}
+
+/* gentle neon pulsing */
+@keyframes glowPulse {
+  0%, 100% {
+    text-shadow:
+      0 0 6px var(--neon-green),
+      0 0 12px var(--neon-green),
+      0 0 20px var(--neon-green),
+      0 0 40px var(--neon-green);
+  }
+  50% {
+    text-shadow:
+      0 0 8px var(--neon-green),
+      0 0 16px var(--neon-green),
+      0 0 24px var(--neon-green),
+      0 0 50px var(--neon-green);
+  }
+}
+
+/* icon bounce for modern feel */
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
 
 /* Execute button */
 .run-btn {
