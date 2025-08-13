@@ -27,6 +27,12 @@ const App = () => {
   const [messages, setMessages] = useState([]);
   const [chatInput, setChatInput] = useState("");
 
+   useEffect(() => {
+    if (socket && roomId && userName) {
+      socket.emit("join", { roomId, userName });
+    }
+  }, [roomId, userName]);
+
   // Toggles (placeholders for now)
   const [videoOn, setVideoOn] = useState(true);
   const [audioOn, setAudioOn] = useState(true);
