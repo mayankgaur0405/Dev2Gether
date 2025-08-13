@@ -24,7 +24,6 @@ function reloadWebsite() {
 
 setInterval(reloadWebsite, interval);
 
-
 const io = new Server(server, {
   cors: {
     origin: "*",
@@ -38,6 +37,19 @@ io.on("connection", (socket) => {
 
   let currentRoom = null;
   let currentUser = null;
+
+  // Inside your io.on("connection", (socket) => { ... })
+  socket.on("chatMessage", ({ roomId, sender, text, time }) => {
+    // Broadcast to everyone else in the room
+    if (!roomId) return;
+    const msg = {
+      sender: sender || "User",
+      text: String(text || ""),
+      time: time || Date.now(),
+    };
+    // send to all except sender
+    socket.to(roomId).emit("chatMessage", msg);
+  });
 
   socket.on("join", ({ roomId, userName }) => {
     if (currentRoom) {
@@ -84,23 +96,25 @@ io.on("connection", (socket) => {
     io.to(roomId).emit("languageUpdate", language);
   });
 
-    socket.on("compileCode", async ({ code, roomId, language, version }) => {
+  socket.on("compileCode", async ({ code, roomId, language, version }) => {
     if (rooms.has(roomId)) {
       const room = rooms.get(roomId);
-      const response = await axios.post("https://emkc.org/api/v2/piston/execute", {
-        language,
-        version,
-        files: [
-          {
-            content: code,
-          },
-        ],
-      });
+      const response = await axios.post(
+        "https://emkc.org/api/v2/piston/execute",
+        {
+          language,
+          version,
+          files: [
+            {
+              content: code,
+            },
+          ],
+        }
+      );
       room.output = response.data.run.output;
       io.to(roomId).emit("codeResponse", response.data);
     }
   });
-
 
   socket.on("disconnect", () => {
     if (currentRoom && currentUser) {
