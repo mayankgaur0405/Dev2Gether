@@ -311,11 +311,34 @@ const App = () => {
           title="AI"
           onClick={() => showToast("AI assistant coming soon")}
         >
-          <svg viewBox="0 0 24 24">
-            <path
-              fill="currentColor"
-              d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            fill="currentColor"
+          >
+            <rect
+              x="3"
+              y="3"
+              width="14"
+              height="14"
+              rx="3"
+              ry="3"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              fill="none"
             />
+            <text
+              x="6.5"
+              y="12.5"
+              fontSize="6"
+              fontWeight="bold"
+              fontFamily="sans-serif"
+            >
+              AI
+            </text>
+            <path d="M19 5l.6 1.4L21 7l-1.4.6L19 9l-.6-1.4L17 7l1.4-.6L19 5z" />
           </svg>
         </button>
 
