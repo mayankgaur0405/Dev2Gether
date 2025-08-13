@@ -247,7 +247,7 @@ const App = () => {
         {/* 1. Video toggle */}
         <button
           className={`icon-btn ${videoOn ? "on" : "off"}`}
-          title="Video"
+          title={videoOn ? "Turn Off Camera" : "Turn On Camera"}
           onClick={() => setVideoOn((v) => !v)}
           style={{
             backgroundColor: videoOn ? "transparent" : "red",
