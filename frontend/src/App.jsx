@@ -53,7 +53,10 @@ const App = () => {
     socket.on("codeUpdate", (newCode) => setCode(newCode));
 
     socket.on("userTyping", (user) => {
-      setTyping(`${user.slice(0, 8)}... is Typing`);
+      setTyping(
+        `${user.length > 20 ? user.slice(0, 20) + "..." : user} is Typing`
+      );
+
       setTimeout(() => setTyping(""), 2000);
     });
 
